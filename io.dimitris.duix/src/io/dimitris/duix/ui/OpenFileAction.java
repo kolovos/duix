@@ -12,7 +12,7 @@ public class OpenFileAction extends AppAction {
 	
 	protected File file;
 	
-	public OpenFileAction(App app, File file) {
+	public OpenFileAction(Duix app, File file) {
 		super(app, "Open...");
 		this.file = file;
 	}

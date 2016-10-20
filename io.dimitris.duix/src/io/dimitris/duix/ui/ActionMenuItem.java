@@ -10,9 +10,9 @@ import javax.swing.AbstractAction;
 class ActionMenuItem extends MenuItem {
 		
 	protected AbstractAction action;
-	protected App app;
+	protected Duix app;
 	
-	public ActionMenuItem(final App app, final AbstractAction action) {
+	public ActionMenuItem(final Duix app, final AbstractAction action) {
 		super("" + action.getValue(AbstractAction.NAME));
 		this.app = app;
 		app.getActionMenuItems().add(this);

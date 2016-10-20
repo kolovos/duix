@@ -3,7 +3,7 @@ package io.dimitris.duix.ui;
 @SuppressWarnings("serial")
 public class ResumeSlideshowAction extends AppAction {
 
-	public ResumeSlideshowAction(App app) {
+	public ResumeSlideshowAction(Duix app) {
 		super(app, "Resume");
 	}
 

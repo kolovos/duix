@@ -7,9 +7,9 @@ import javax.swing.AbstractAction;
 @SuppressWarnings("serial")
 public abstract class AppAction extends AbstractAction {
 	
-	protected App app;
+	protected Duix app;
 	
-	public AppAction(App app, String label) {
+	public AppAction(Duix app, String label) {
 		super(label);
 		this.app = app;
 	}

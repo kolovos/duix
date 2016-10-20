@@ -11,6 +11,7 @@ import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.PopupMenu;
 import java.awt.Toolkit;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
-public class App {
+public class Duix {
 	
 	protected JPanel dropTarget;
 	protected JFrame main;
@@ -34,7 +35,11 @@ public class App {
 	
 	public static void main(String[] args) throws Exception {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		new App().run();
+		Duix duix = new Duix();
+		duix.run();
+		if (args.length == 1) {
+			new OpenFileAction(duix, new File(args[0])).actionPerformed(null);
+		}
 	}
 	
 	protected void run() throws Exception {
@@ -57,7 +62,7 @@ public class App {
 		new  FileDrop(dropTarget, BorderFactory.createCompoundBorder(emptyBorder, activeDashedBorder), new FileDrop.Listener() {   
 			public void  filesDropped( java.io.File[] files ) {   
 		          if (files[0].getName().endsWith("pdf")) {
-		        	  try { new OpenFileAction(App.this, files[0]).actionPerformed(null); }
+		        	  try { new OpenFileAction(Duix.this, files[0]).actionPerformed(null); }
 		        	  catch (Exception ex) { ex.printStackTrace(); }
 		          }
 		      }
@@ -69,7 +74,7 @@ public class App {
 		main.setSize(400, 400);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		main.setLocation((int)(screen.getWidth()-main.getWidth())/2, (int)(screen.getHeight()-main.getHeight())/2);
-		main.setTitle("jdspdfviewer");
+		main.setTitle("Duix");
 		main.setVisible(true);
 	}
 	

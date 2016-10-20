@@ -36,9 +36,9 @@ public class Slideshow {
 		SlideshowCommandListener defaultListener = new DefaultSlideshowCommandListener() {
 			
 			@Override
-			public void goToSlide(int slideNumber) {
+			public boolean goToSlide(int slideNumber) {
 				slidesFrame.getSlidePanel().goToSlide(slideNumber);
-				notesFrame.getSlidePanel().goToSlide(slideNumber);
+				return notesFrame.getSlidePanel().goToSlide(slideNumber);
 			}
 			
 			@Override

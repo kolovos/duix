@@ -2,7 +2,7 @@ package io.dimitris.duix;
 
 public class DefaultSlideshowCommandListener implements SlideshowCommandListener {
 	
-	protected int slideNumber = 1;
+	protected int slideNumber = 0;
 	
 	public DefaultSlideshowCommandListener() {}
 	
@@ -15,18 +15,28 @@ public class DefaultSlideshowCommandListener implements SlideshowCommandListener
 	public void exit() {}
 
 	@Override
-	public void goToSlide(int slideNumber) {}
+	public boolean goToSlide(int slideNumber) { return false; }
 
 	@Override
-	final public void next() {
-		slideNumber ++;
-		goToSlide(slideNumber);
+	final public boolean next() {
+		if (goToSlide(slideNumber+1)) {
+			slideNumber++;
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override
-	final public void previous() {
-		slideNumber --;
-		goToSlide(slideNumber);
+	final public boolean previous() {
+		if (goToSlide(slideNumber-1)) {
+			slideNumber--;
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override

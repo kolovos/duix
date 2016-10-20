@@ -5,7 +5,7 @@ package io.dimitris.duix.ui;
 @SuppressWarnings("serial")
 public class StopSlideshowAction extends AppAction {
 
-	public StopSlideshowAction(App app) {
+	public StopSlideshowAction(Duix app) {
 		super(app, "Stop");
 	}
 

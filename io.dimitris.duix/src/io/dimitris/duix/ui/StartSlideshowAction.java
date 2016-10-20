@@ -6,7 +6,7 @@ import io.dimitris.duix.DefaultSlideshowCommandListener;
 @SuppressWarnings("serial")
 public class StartSlideshowAction extends AppAction {
 
-	public StartSlideshowAction(App app) {
+	public StartSlideshowAction(Duix app) {
 		super(app, "Start");
 	}
 
@@ -16,8 +16,8 @@ public class StartSlideshowAction extends AppAction {
 		app.getSlideshow().start(new DefaultSlideshowCommandListener() {
 			
 			@Override
-			public void goToSlide(int slideNumber) {
-				app.getPreviewPanel().goToSlide(slideNumber);
+			public boolean goToSlide(int slideNumber) {
+				return app.getPreviewPanel().goToSlide(slideNumber);
 			}
 			
 			@Override

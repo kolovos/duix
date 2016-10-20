@@ -4,11 +4,11 @@ public interface SlideshowCommandListener {
 	
 	public void exit();
 	
-	public void goToSlide(int slideNumber);
+	public boolean goToSlide(int slideNumber);
 	
-	public void next();
+	public boolean next();
 	
-	public void previous();
+	public boolean previous();
 	
 	public void blank();
 	

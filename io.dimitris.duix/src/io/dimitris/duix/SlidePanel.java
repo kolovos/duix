@@ -30,11 +30,15 @@ public class SlidePanel extends JComponent {
 		return slideNumber;
 	}
 	
-	public void goToSlide(int slideNumber) {
+	public boolean goToSlide(int slideNumber) {
 		if (slideNumber >= 0 && slideNumber < document.getNumberOfPages()) {
 			this.slideNumber = slideNumber;
+			this.repaint();
+			return true;
 		}
-		this.repaint();
+		else {
+			return false;
+		}
 	}
 	
 	public void setBlank(boolean blank) {
