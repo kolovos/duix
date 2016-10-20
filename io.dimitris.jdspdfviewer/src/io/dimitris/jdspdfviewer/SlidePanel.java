@@ -1,6 +1,5 @@
 package io.dimitris.jdspdfviewer;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -17,6 +16,7 @@ public class SlidePanel extends JComponent {
 	protected PDFRenderer renderer;
 	protected int slideNumber = 0;
 	protected boolean left = true;
+	protected boolean blank = false;
 	
 	public SlidePanel(PDDocument document, boolean left) {
 		this.document = document;
@@ -33,6 +33,15 @@ public class SlidePanel extends JComponent {
 			this.slideNumber = slideNumber;
 		}
 		this.repaint();
+	}
+	
+	public void setBlank(boolean blank) {
+		this.blank = blank;
+		this.repaint();
+	}
+	
+	public boolean isBlank() {
+		return blank;
 	}
 	
 	public void showNext() {
@@ -54,6 +63,8 @@ public class SlidePanel extends JComponent {
 	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if (blank) return;
+        
         BufferedImage image;
 	    try {
 	        image = renderer.renderImage(slideNumber);

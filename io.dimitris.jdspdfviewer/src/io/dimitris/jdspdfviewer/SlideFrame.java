@@ -48,7 +48,7 @@ public class SlideFrame extends JFrame {
 				slidePanel.showPrevious();
 				if (counterpart != null) counterpart.getSlidePanel().showPrevious();
 			}
-		}, KeyEvent.VK_LEFT, KeyEvent.VK_UP);
+		}, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_BACK_SPACE);
 		
 		
 	}
@@ -65,7 +65,7 @@ public class SlideFrame extends JFrame {
 		return slidePanel;
 	}
 	
-	protected void addKeyAction(Action action, int... keyEvents) {
+	public void addKeyAction(Action action, int... keyEvents) {
 		for (int keyEvent : keyEvents) {
 			KeyStroke keyStroke = KeyStroke.getKeyStroke(keyEvent, 0);
 			getRootPane().getInputMap().put(keyStroke, keyEvent + "");
