@@ -13,13 +13,12 @@ public class App {
 	protected SlideFrame notesFrame;
 	
 	public static void main(String[] args) throws Exception {
-		new App().run(args[0]);
+		new App().run(new File(args[0]));
 	}
 
-	protected void run(String pdf) throws Exception {
+	protected void run(File pdf) throws Exception {
 
-		File file = new File(pdf);
-		PDDocument document = PDDocument.load(file);
+		PDDocument document = PDDocument.load(pdf);
 
 		boolean splitGuess = false;
 		PDRectangle rectangle = document.getPage(0).getMediaBox();
