@@ -22,6 +22,8 @@ public class AppUI {
 	protected JPanel dropTarget;
 	protected JFrame main;
 	protected File pdf;
+	protected Slideshow slideshow;
+	protected SlidePanel previewPanel;
 	
 	public static void main(String[] args) throws Exception {
 		
@@ -72,7 +74,7 @@ public class AppUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					new App().run(pdf);
+					startSlideshow();
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -81,12 +83,29 @@ public class AppUI {
 		main.getRootPane().add(toolbar, BorderLayout.SOUTH);
 	}
 	
+	protected void startSlideshow() throws Exception {
+		slideshow = new Slideshow(pdf);
+		slideshow.start(new DefaultSlideshowCommandListener() {
+			
+			@Override
+			public void goToSlide(int slideNumber) {
+				previewPanel.goToSlide(slideNumber);
+			}
+			
+			@Override
+			public void exit() {
+				slideshow.stop();
+			}
+			
+		});
+	}
+	
 	protected void open(File file) throws Exception {
 		this.pdf = file;
 		PDDocument document = PDDocument.load(file);
-		SlidePanel slidePanel = new SlidePanel(document, false, true);
+		previewPanel = new SlidePanel(document, false, true);
 		dropTarget.removeAll();
-		dropTarget.add(slidePanel, BorderLayout.CENTER);
+		dropTarget.add(previewPanel, BorderLayout.CENTER);
 		dropTarget.updateUI();
 	}
 	

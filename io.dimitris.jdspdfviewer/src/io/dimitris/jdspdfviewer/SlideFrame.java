@@ -6,6 +6,8 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -16,8 +18,7 @@ import javax.swing.KeyStroke;
 public class SlideFrame extends JFrame {
 	
 	protected SlidePanel slidePanel;
-	protected SlideFrame counterpart;
-	protected boolean public_ = false;
+	protected List<SlideshowCommandListener> slideshowCommandListeners = new ArrayList<SlideshowCommandListener>();
 	
 	public SlideFrame(final SlidePanel slidePanel) {
 		super();
@@ -30,7 +31,9 @@ public class SlideFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 System.exit(0);
+				for (SlideshowCommandListener listener : slideshowCommandListeners) {
+					listener.exit();
+				}
 			}
 		}, KeyEvent.VK_ESCAPE);
 		
@@ -38,8 +41,11 @@ public class SlideFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				slidePanel.showNext();
-				if (counterpart != null) counterpart.getSlidePanel().showNext();
+				//slidePanel.showNext();
+				//if (counterpart != null) counterpart.getSlidePanel().showNext();
+				for (SlideshowCommandListener listener : slideshowCommandListeners) {
+					listener.next();;
+				}
 			}
 		}, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_SPACE);
 		
@@ -47,8 +53,11 @@ public class SlideFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				slidePanel.showPrevious();
-				if (counterpart != null) counterpart.getSlidePanel().showPrevious();
+				//slidePanel.showPrevious();
+				//if (counterpart != null) counterpart.getSlidePanel().showPrevious();
+				for (SlideshowCommandListener listener : slideshowCommandListeners) {
+					listener.previous();
+				}
 			}
 		}, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_BACK_SPACE);
 		
@@ -56,30 +65,25 @@ public class SlideFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (isPublic()) getSlidePanel().setBlank(!getSlidePanel().isBlank());
+				//if (isPublic()) getSlidePanel().setBlank(!getSlidePanel().isBlank());
+				for (SlideshowCommandListener listener : slideshowCommandListeners) {
+					listener.blank();
+				}
 			}
 		}, KeyEvent.VK_B);
 		
 	}
 	
-	public void setCounterpart(SlideFrame counterpart) {
-		this.counterpart = counterpart;
+	public void addSlideshowCommandListener(SlideshowCommandListener listener) {
+		slideshowCommandListeners.add(listener);
 	}
 	
-	public SlideFrame getCounterpart() {
-		return counterpart;
+	public boolean removeSlideshowCommandListener(SlideshowCommandListener listener) {
+		return slideshowCommandListeners.remove(listener);
 	}
 	
 	public SlidePanel getSlidePanel() {
 		return slidePanel;
-	}
-	
-	public boolean isPublic() {
-		return public_;
-	}
-	
-	public void setPublic(boolean public_) {
-		this.public_ = public_;
 	}
 	
 	public void addKeyAction(Action action, int... keyEvents) {

@@ -30,7 +30,7 @@ public class SlidePanel extends JComponent {
 		return slideNumber;
 	}
 	
-	public void setSlideNumber(int slideNumber) {
+	public void goToSlide(int slideNumber) {
 		if (slideNumber >= 0 && slideNumber < document.getNumberOfPages()) {
 			this.slideNumber = slideNumber;
 		}
@@ -47,11 +47,11 @@ public class SlidePanel extends JComponent {
 	}
 	
 	public void showNext() {
-		setSlideNumber(getSlideNumber() + 1); 
+		goToSlide(getSlideNumber() + 1); 
 	}
 	
 	public void showPrevious() {
-		setSlideNumber(getSlideNumber() - 1);
+		goToSlide(getSlideNumber() - 1);
 	}
 	
 	public void setLeft(boolean left) {
