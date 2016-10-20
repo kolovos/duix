@@ -17,10 +17,12 @@ public class SlideFrame extends JFrame {
 	
 	protected SlidePanel slidePanel;
 	protected SlideFrame counterpart;
+	protected boolean public_ = false;
 	
 	public SlideFrame(final SlidePanel slidePanel) {
 		super();
 		this.slidePanel = slidePanel;
+		this.setUndecorated(true);
 		getRootPane().setLayout(new BorderLayout());
 		getRootPane().add(slidePanel, BorderLayout.CENTER);
 		getRootPane().setBackground(Color.black);
@@ -50,6 +52,13 @@ public class SlideFrame extends JFrame {
 			}
 		}, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_BACK_SPACE);
 		
+		addKeyAction(new AbstractAction() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (isPublic()) getSlidePanel().setBlank(!getSlidePanel().isBlank());
+			}
+		}, KeyEvent.VK_B);
 		
 	}
 	
@@ -63,6 +72,14 @@ public class SlideFrame extends JFrame {
 	
 	public SlidePanel getSlidePanel() {
 		return slidePanel;
+	}
+	
+	public boolean isPublic() {
+		return public_;
+	}
+	
+	public void setPublic(boolean public_) {
+		this.public_ = public_;
 	}
 	
 	public void addKeyAction(Action action, int... keyEvents) {

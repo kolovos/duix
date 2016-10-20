@@ -17,9 +17,11 @@ public class SlidePanel extends JComponent {
 	protected int slideNumber = 0;
 	protected boolean left = true;
 	protected boolean blank = false;
+	protected boolean split = true;
 	
-	public SlidePanel(PDDocument document, boolean left) {
+	public SlidePanel(PDDocument document, boolean split, boolean left) {
 		this.document = document;
+		this.split = split;
 		this.left = left;
 		this.renderer = new PDFRenderer(document);
 	}
@@ -60,6 +62,14 @@ public class SlidePanel extends JComponent {
 		return left;
 	}
 	
+	public boolean isSplit() {
+		return split;
+	}
+	
+	public void setSplit(boolean split) {
+		this.split = split;
+	}
+	
 	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -67,31 +77,42 @@ public class SlidePanel extends JComponent {
         
         BufferedImage image;
 	    try {
+	    	//TODO: See if the width/height of the page can be computed as follows to avoid rendering multiple times
+	    	// int originalWidth = (int) document.getPage(slideNumber).getMediaBox().getWidth();
+	    	//TODO: Add support for non-split slides
 	        image = renderer.renderImage(slideNumber);
 	        int originalWidth = image.getWidth();
 	        int originalHeight = image.getHeight();
-			image = renderer.renderImage(slideNumber, 2*(float)getWidth()/originalWidth);
+	        int parts = 1;
+	        if (split) { parts = 2; };
+	        
+			image = renderer.renderImage(slideNumber, parts*(float)getWidth()/originalWidth);
 			if (image.getHeight() > this.getHeight()) {
 				image = renderer.renderImage(slideNumber, (float) getHeight()/originalHeight);
 			}
 			
-			BufferedImage half = new BufferedImage(image.getWidth()/2, image.getHeight(), image.getType());
-			Graphics2D gr = half.createGraphics();
+			BufferedImage drawable = image;
 			
-			if (left) {
-				gr.drawImage(image, 0, 0, image.getWidth()/2, image.getHeight(),
-					0, 0, image.getWidth()/2, image.getHeight(), null);
+			if (split) {
+				BufferedImage half = new BufferedImage(image.getWidth()/parts, image.getHeight(), image.getType());
+				Graphics2D gr = half.createGraphics();
+				
+				if (left) {
+					gr.drawImage(image, 0, 0, image.getWidth()/2, image.getHeight(),
+						0, 0, image.getWidth()/2, image.getHeight(), null);
+				}
+				else {
+					gr.drawImage(image, 0, 0, image.getWidth()/2, image.getHeight(),
+							image.getWidth()/2, 0, image.getWidth(), image.getHeight(), null);					
+				}
+				drawable = half;
+				gr.dispose();
 			}
-			else {
-				gr.drawImage(image, 0, 0, image.getWidth()/2, image.getHeight(),
-						image.getWidth()/2, 0, image.getWidth(), image.getHeight(), null);					
-			}
-			gr.dispose();
 			
-			int leftMargin = (getWidth() - half.getWidth()) / 2;
-			int topMargin = (getHeight() - half.getHeight()) / 2;
+			int leftMargin = (getWidth() - drawable.getWidth()) / 2;
+			int topMargin = (getHeight() - drawable.getHeight()) / 2;
 			
-			g.drawImage(half, leftMargin, topMargin, this);
+			g.drawImage(drawable, leftMargin, topMargin, this);
         }
         catch (Exception ex) {
         	ex.printStackTrace();
