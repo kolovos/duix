@@ -21,7 +21,6 @@ public class AppUI {
 	
 	protected JPanel dropTarget;
 	protected JFrame main;
-	protected File pdf;
 	protected Slideshow slideshow;
 	protected SlidePanel previewPanel;
 	
@@ -80,11 +79,30 @@ public class AppUI {
 				}
 			}
 		});
+		
+		toolbar.add(new AbstractAction("Resume") {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (slideshow.canResume()) {
+						slideshow.resume();
+					}
+					else {
+						startSlideshow();
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
 		main.getRootPane().add(toolbar, BorderLayout.SOUTH);
 	}
 	
 	protected void startSlideshow() throws Exception {
-		slideshow = new Slideshow(pdf);
+		
 		slideshow.start(new DefaultSlideshowCommandListener() {
 			
 			@Override
@@ -96,13 +114,12 @@ public class AppUI {
 			public void exit() {
 				slideshow.stop();
 			}
-			
 		});
 	}
 	
-	protected void open(File file) throws Exception {
-		this.pdf = file;
-		PDDocument document = PDDocument.load(file);
+	protected void open(File pdf) throws Exception {
+		slideshow = new Slideshow(pdf);
+		PDDocument document = PDDocument.load(pdf);
 		previewPanel = new SlidePanel(document, false, true);
 		dropTarget.removeAll();
 		dropTarget.add(previewPanel, BorderLayout.CENTER);

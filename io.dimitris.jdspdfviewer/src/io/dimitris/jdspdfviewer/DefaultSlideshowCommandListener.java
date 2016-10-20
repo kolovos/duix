@@ -3,7 +3,14 @@ package io.dimitris.jdspdfviewer;
 public class DefaultSlideshowCommandListener implements SlideshowCommandListener {
 	
 	protected int slideNumber = 1;
-
+	
+	public DefaultSlideshowCommandListener() {}
+	
+	public DefaultSlideshowCommandListener(int slideNumber) {
+		this.slideNumber = slideNumber;
+		goToSlide(slideNumber);
+	}
+	
 	@Override
 	public void exit() {}
 

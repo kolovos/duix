@@ -18,7 +18,7 @@ public class Slideshow {
 	}
 	
 	protected void start(SlideshowCommandListener externalListener) throws Exception {
-
+		
 		PDDocument document = PDDocument.load(pdf);
 
 		boolean splitGuess = false;
@@ -49,7 +49,12 @@ public class Slideshow {
 			notesFrame.addSlideshowCommandListener(externalListener);
 		}
 		
-	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	    resume();
+		
+	}
+	
+	public void resume() {
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gs = ge.getScreenDevices();
 		
 		if (gs.length > 1) {
@@ -59,7 +64,6 @@ public class Slideshow {
 		else {
 			slidesFrame.showOnScreen(1);
 		}
-		
 	}
 	
 	public SlideFrame getSlidesFrame() {
@@ -71,8 +75,11 @@ public class Slideshow {
 	}
 	
 	protected void stop() {
-		slidesFrame.dispose();
-		notesFrame.dispose();
+		if (slidesFrame != null) slidesFrame.dispose();
+		if (notesFrame != null) notesFrame.dispose();
 	}
 	
+	protected boolean canResume() {
+		return slidesFrame != null;
+	}
 }
