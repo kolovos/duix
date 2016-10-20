@@ -4,5 +4,5 @@ Keyboard shortcuts
 ---
 * <kbd>right arrow</kbd>, <kbd>up</kbd>, <kbd>space</kbd>: Next slide
 * <kbd>left arrow</kbd>, <kbd>down</kbd>, <kbd>backspace</kbd>: Previous slide
-* <kbd>b</kbd>: blank screen
-* <kbd>escape</kbd>: exit
+* <kbd>b</kbd>: Blank/unblank screen
+* <kbd>escape</kbd>: Exit
