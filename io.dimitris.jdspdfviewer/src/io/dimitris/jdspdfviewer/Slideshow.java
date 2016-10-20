@@ -11,22 +11,19 @@ public class Slideshow {
 	
 	protected SlideFrame slidesFrame;
 	protected SlideFrame notesFrame;
-	protected File pdf;
+	protected PDDocument document;
+	protected boolean hasNotes = false;
 	
-	public Slideshow(File pdf) {
-		this.pdf = pdf;
+	public Slideshow(File pdf) throws Exception {
+		document = PDDocument.load(pdf);
+		PDRectangle rectangle = document.getPage(0).getMediaBox();
+		if (rectangle.getWidth() > rectangle.getHeight() * 2) { hasNotes = true; };
 	}
 	
 	protected void start(SlideshowCommandListener externalListener) throws Exception {
 		
-		PDDocument document = PDDocument.load(pdf);
-
-		boolean splitGuess = false;
-		PDRectangle rectangle = document.getPage(0).getMediaBox();
-		if (rectangle.getWidth() > rectangle.getHeight() * 2) { splitGuess = true; };
-		
-		slidesFrame = new SlideFrame(new SlidePanel(document, splitGuess, true));
-		notesFrame = new SlideFrame(new SlidePanel(document, splitGuess, false));
+		slidesFrame = new SlideFrame(new SlidePanel(document, hasNotes, true));
+		notesFrame = new SlideFrame(new SlidePanel(document, hasNotes, false));
 		
 		SlideshowCommandListener defaultListener = new DefaultSlideshowCommandListener() {
 			
@@ -51,6 +48,14 @@ public class Slideshow {
 		
 	    resume();
 		
+	}
+	
+	public boolean hasNotes() {
+		return hasNotes;
+	}
+	
+	public PDDocument getDocument() {
+		return document;
 	}
 	
 	public void resume() {

@@ -63,7 +63,6 @@ public class AppUI {
 		main.setLocation(800, 400);
 		main.setTitle("jdspdfviewer");
 		main.setVisible(true);
-		
 	}
 	
 	protected void createToolbar() {
@@ -97,7 +96,6 @@ public class AppUI {
 			}
 		});
 		
-		
 		main.getRootPane().add(toolbar, BorderLayout.SOUTH);
 	}
 	
@@ -119,8 +117,7 @@ public class AppUI {
 	
 	protected void open(File pdf) throws Exception {
 		slideshow = new Slideshow(pdf);
-		PDDocument document = PDDocument.load(pdf);
-		previewPanel = new SlidePanel(document, false, true);
+		previewPanel = new SlidePanel(slideshow.getDocument(), slideshow.hasNotes(), true);
 		dropTarget.removeAll();
 		dropTarget.add(previewPanel, BorderLayout.CENTER);
 		dropTarget.updateUI();
