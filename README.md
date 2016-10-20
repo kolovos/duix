@@ -2,7 +2,7 @@ jdspdfviewer is a Java-based dual-screen PDF viewer, mainly targeted at Beamer p
 
 Keyboard shortcuts
 ---
-* <kbd>right arrow</kbd>, <kbd>up</kbd>, <kbd>space</kbd>: Next slide
-* <kbd>left arrow</kbd>, <kbd>down</kbd>, <kbd>backspace</kbd>: Previous slide
-* <kbd>b</kbd>: Blank/unblank screen
-* <kbd>escape</kbd>: Exit
+* <kbd>&rightarrow;</kbd>, <kbd>&downarrow;</kbd>, <kbd>space</kbd>: Next slide
+* <kbd>&leftarrow;</kbd>, <kbd>&uparrow;</kbd>, <kbd>backspace</kbd>: Previous slide
+* <kbd>B</kbd>: Blank/unblank screen
+* <kbd>esc</kbd>: Exit
