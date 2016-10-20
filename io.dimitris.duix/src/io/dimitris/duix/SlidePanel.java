@@ -1,4 +1,4 @@
-package io.dimitris.jdspdfviewer;
+package io.dimitris.duix;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

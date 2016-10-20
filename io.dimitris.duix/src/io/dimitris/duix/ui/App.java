@@ -1,7 +1,7 @@
-package io.dimitris.jdspdfviewer.ui;
+package io.dimitris.duix.ui;
 
-import io.dimitris.jdspdfviewer.SlidePanel;
-import io.dimitris.jdspdfviewer.Slideshow;
+import io.dimitris.duix.SlidePanel;
+import io.dimitris.duix.Slideshow;
 
 import java.awt.BorderLayout;
 import java.awt.CheckboxMenuItem;
@@ -81,8 +81,8 @@ public class App {
 		fileMenu.add(new ActionMenuItem(this, new OpenFileAction(this, null)));
 		menuBar.add(fileMenu);
 		
-		// Presentation menu
-		Menu slideshowMenu = new PopupMenu("Slideshot");
+		// Slideshow menu
+		Menu slideshowMenu = new PopupMenu("Slideshow");
 		slideshowMenu.add(new ActionMenuItem(this, new StartSlideshowAction(this)));
 		slideshowMenu.add(new ActionMenuItem(this, new ResumeSlideshowAction(this)));
 		slideshowMenu.addSeparator();

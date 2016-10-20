@@ -1,4 +1,4 @@
-package io.dimitris.jdspdfviewer.ui;
+package io.dimitris.duix.ui;
 
 import java.awt.event.ActionEvent;
 

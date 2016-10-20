@@ -1,4 +1,4 @@
-package io.dimitris.jdspdfviewer;
+package io.dimitris.duix;
 
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;

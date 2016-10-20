@@ -1,6 +1,6 @@
-package io.dimitris.jdspdfviewer.ui;
+package io.dimitris.duix.ui;
 
-import io.dimitris.jdspdfviewer.DefaultSlideshowCommandListener;
+import io.dimitris.duix.DefaultSlideshowCommandListener;
 
 
 @SuppressWarnings("serial")

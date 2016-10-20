@@ -1,4 +1,4 @@
-package io.dimitris.jdspdfviewer.ui;
+package io.dimitris.duix.ui;
 
 @SuppressWarnings("serial")
 public class ResumeSlideshowAction extends AppAction {

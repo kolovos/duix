@@ -1,4 +1,4 @@
-package io.dimitris.jdspdfviewer;
+package io.dimitris.duix;
 
 public class DefaultSlideshowCommandListener implements SlideshowCommandListener {
 	

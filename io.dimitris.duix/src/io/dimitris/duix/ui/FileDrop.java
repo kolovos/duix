@@ -1,6 +1,6 @@
-package io.dimitris.jdspdfviewer.ui;
+package io.dimitris.duix.ui;
 
-import io.dimitris.jdspdfviewer.ui.FileDrop.TransferableObject;
+import io.dimitris.duix.ui.FileDrop.TransferableObject;
 
 import java.awt.datatransfer.DataFlavor;
 import java.io.BufferedReader;
