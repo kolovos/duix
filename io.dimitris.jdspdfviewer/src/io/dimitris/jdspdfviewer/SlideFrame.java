@@ -23,7 +23,7 @@ public class SlideFrame extends JFrame {
 	public SlideFrame(final SlidePanel slidePanel) {
 		super();
 		this.slidePanel = slidePanel;
-		this.setUndecorated(true);
+		//this.setUndecorated(true);
 		getRootPane().setLayout(new BorderLayout());
 		getRootPane().add(slidePanel, BorderLayout.CENTER);
 		getRootPane().setBackground(Color.black);
@@ -97,6 +97,9 @@ public class SlideFrame extends JFrame {
 	public void showOnScreen(int screen) {
 	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	    GraphicsDevice[] gs = ge.getScreenDevices();
+	    
+	    //System.out.println(gs.length);
+	    
 	    
 	    if( screen > -1 && screen < gs.length ) {
 	        gs[screen].setFullScreenWindow(this);

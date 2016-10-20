@@ -1,4 +1,6 @@
-package io.dimitris.jdspdfviewer;
+package io.dimitris.jdspdfviewer.ui;
+
+import io.dimitris.jdspdfviewer.ui.FileDrop.TransferableObject;
 
 import java.awt.datatransfer.DataFlavor;
 import java.io.BufferedReader;
@@ -46,6 +48,7 @@ import java.io.Reader;
  * @author  rharder@users.sf.net
  * @version 1.0.1
  */
+@SuppressWarnings({"rawtypes", "unchecked", "unused"})
 public class FileDrop
 {
     private transient javax.swing.border.Border normalBorder;
@@ -297,7 +300,8 @@ public class FileDrop
                     // over the drag target.
                 }   // end dragOver
 
-                public void drop( java.awt.dnd.DropTargetDropEvent evt )
+                
+				public void drop( java.awt.dnd.DropTargetDropEvent evt )
                 {   log( out, "FileDrop: drop event." );
                     try
                     {   // Get whatever was dropped
@@ -438,7 +442,8 @@ public class FileDrop
     
      // BEGIN 2007-09-12 Nathan Blomquist -- Linux (KDE/Gnome) support added.
      private static String ZERO_CHAR_STRING = "" + (char)0;
-     private static File[] createFileArray(BufferedReader bReader, PrintStream out)
+     
+	private static File[] createFileArray(BufferedReader bReader, PrintStream out)
      {
         try { 
             java.util.List list = new java.util.ArrayList();
@@ -646,7 +651,8 @@ public class FileDrop
      * @author  rob@iharder.net
      * @version 1.2
      */
-    public static class Event extends java.util.EventObject {
+    @SuppressWarnings("serial")
+	public static class Event extends java.util.EventObject {
 
         private java.io.File[] files;
 

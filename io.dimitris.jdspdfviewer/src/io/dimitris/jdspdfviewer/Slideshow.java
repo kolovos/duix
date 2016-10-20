@@ -1,7 +1,9 @@
 package io.dimitris.jdspdfviewer;
 
+import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.io.File;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -13,6 +15,7 @@ public class Slideshow {
 	protected SlideFrame notesFrame;
 	protected PDDocument document;
 	protected boolean hasNotes = false;
+	protected boolean fullscreen = true;
 	
 	public Slideshow(File pdf) throws Exception {
 		document = PDDocument.load(pdf);
@@ -20,10 +23,15 @@ public class Slideshow {
 		if (rectangle.getWidth() > rectangle.getHeight() * 2) { hasNotes = true; };
 	}
 	
-	protected void start(SlideshowCommandListener externalListener) throws Exception {
+	public void start(SlideshowCommandListener externalListener) throws Exception {
 		
 		slidesFrame = new SlideFrame(new SlidePanel(document, hasNotes, true));
 		notesFrame = new SlideFrame(new SlidePanel(document, hasNotes, false));
+		slidesFrame.setSize(400, 400);
+		notesFrame.setSize(400, 400);
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		slidesFrame.setLocation((int)(screen.getWidth()-slidesFrame.getWidth())/2 - 100, (int)(screen.getHeight()-slidesFrame.getHeight())/2 - 100);
+		notesFrame.setLocation((int)(screen.getWidth()-notesFrame.getWidth())/2 + 100, (int)(screen.getHeight()-notesFrame.getHeight())/2 + 100);
 		
 		SlideshowCommandListener defaultListener = new DefaultSlideshowCommandListener() {
 			
@@ -59,15 +67,23 @@ public class Slideshow {
 	}
 	
 	public void resume() {
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		GraphicsDevice[] gs = ge.getScreenDevices();
 		
-		if (gs.length > 1) {
-			notesFrame.showOnScreen(1);
-			slidesFrame.showOnScreen(2);
+		if (fullscreen) {
+		
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			GraphicsDevice[] gs = ge.getScreenDevices();
+			
+			if (gs.length > 1) {
+				notesFrame.showOnScreen(1);
+				slidesFrame.showOnScreen(2);
+			}
+			else {
+				slidesFrame.showOnScreen(1);
+			}
 		}
 		else {
-			slidesFrame.showOnScreen(1);
+			notesFrame.setVisible(true);
+			slidesFrame.setVisible(true);
 		}
 	}
 	
@@ -79,12 +95,26 @@ public class Slideshow {
 		return notesFrame;
 	}
 	
-	protected void stop() {
-		if (slidesFrame != null) slidesFrame.dispose();
-		if (notesFrame != null) notesFrame.dispose();
+	public void stop() {
+		if (slidesFrame != null) {
+			slidesFrame.setVisible(false);
+			slidesFrame.dispose();
+		}
+		if (notesFrame != null) {
+			notesFrame.setVisible(false);
+			notesFrame.dispose();
+		}
 	}
 	
-	protected boolean canResume() {
+	public boolean canResume() {
 		return slidesFrame != null;
+	}
+	
+	public boolean isFullscreen() {
+		return fullscreen;
+	}
+	
+	public void setFullscreen(boolean fullscreen) {
+		this.fullscreen = fullscreen;
 	}
 }
