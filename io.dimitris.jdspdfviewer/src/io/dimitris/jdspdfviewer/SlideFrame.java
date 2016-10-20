@@ -1,6 +1,7 @@
 package io.dimitris.jdspdfviewer;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
@@ -22,7 +23,7 @@ public class SlideFrame extends JFrame {
 		this.slidePanel = slidePanel;
 		getRootPane().setLayout(new BorderLayout());
 		getRootPane().add(slidePanel, BorderLayout.CENTER);
-		
+		getRootPane().setBackground(Color.black);
 		addKeyAction(new AbstractAction() {
 			
 			@Override

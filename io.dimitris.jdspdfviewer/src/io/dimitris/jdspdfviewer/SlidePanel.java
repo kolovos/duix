@@ -1,5 +1,6 @@
 package io.dimitris.jdspdfviewer;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -76,7 +77,10 @@ public class SlidePanel extends JComponent {
 			}
 			gr.dispose();
 			
-			g.drawImage(half, 0, 0, this);
+			int leftMargin = (getWidth() - half.getWidth()) / 2;
+			int topMargin = (getHeight() - half.getHeight()) / 2;
+			
+			g.drawImage(half, leftMargin, topMargin, this);
         }
         catch (Exception ex) {
         	ex.printStackTrace();
