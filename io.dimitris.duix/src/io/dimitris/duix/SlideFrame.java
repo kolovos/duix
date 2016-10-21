@@ -36,7 +36,7 @@ public class SlideFrame extends JFrame {
 					listener.exit();
 				}
 			}
-		}, KeyEvent.VK_ESCAPE);
+		}, KeyEvent.VK_ESCAPE, KeyEvent.VK_Q);
 		
 		addKeyAction(new AbstractAction() {
 			
@@ -66,7 +66,7 @@ public class SlideFrame extends JFrame {
 					listener.blank();
 				}
 			}
-		}, KeyEvent.VK_B);
+		}, KeyEvent.VK_B, KeyEvent.VK_PERIOD);
 		
 	}
 	
