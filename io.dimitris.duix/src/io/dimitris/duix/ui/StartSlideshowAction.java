@@ -13,6 +13,7 @@ public class StartSlideshowAction extends AppAction {
 	@Override
 	public void actionPerformed() throws Exception {
 		app.getSlideshow().setFullscreen(app.isFullscreen());
+		app.getSlideshow().setSwapScreens(app.isSwapScreeens());
 		app.getSlideshow().start(new DefaultSlideshowCommandListener() {
 			
 			@Override

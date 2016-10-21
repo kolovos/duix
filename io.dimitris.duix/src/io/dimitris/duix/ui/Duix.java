@@ -31,6 +31,7 @@ public class Duix {
 	protected SlidePanel previewPanel;
 	protected PopupMenu menu = null;
 	protected CheckboxMenuItem fullscreenMenuItem = null;
+	protected CheckboxMenuItem swapScreensMenuItem = null;
 	protected List<ActionMenuItem> actionMenuItems = new ArrayList<ActionMenuItem>();
 	
 	public static void main(String[] args) throws Exception {
@@ -93,6 +94,8 @@ public class Duix {
 		slideshowMenu.addSeparator();
 		fullscreenMenuItem = new CheckboxMenuItem("Fullscreen", true);
 		slideshowMenu.add(fullscreenMenuItem);
+		swapScreensMenuItem = new CheckboxMenuItem("Swap screens", false);
+		slideshowMenu.add(swapScreensMenuItem);
 		menuBar.add(slideshowMenu);
 		
 		main.setMenuBar(menuBar);
@@ -126,6 +129,10 @@ public class Duix {
 	
 	public boolean isFullscreen() {
 		return fullscreenMenuItem.getState();
+	}
+
+	public boolean isSwapScreeens() {
+		return swapScreensMenuItem.getState();
 	}
 	
 }

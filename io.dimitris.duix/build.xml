@@ -5,15 +5,18 @@
 
 	<target name="default">
 
-		<jar destfile="dist/io.dimitris.duix.jar">
+		<jar destfile="dist/duix.jar">
 			<fileset dir="bin"/>
+			<manifest>
+				<attribute name="Main-Class" value="io.dimitris.duix.ui.Duix"/>
+			</manifest>
 		</jar>
 		
 		<delete file="dist/Duix.dmg"/>
 		<delete dir="dist/Duix.app"/>
 
 		<bundleapp outputdirectory="dist" name="Duix" displayname="Duix" identifier="Duix" mainclassname="io.dimitris.duix.ui.Duix" icon="resources/duix.icns">
-			<classpath file="dist/io.dimitris.duix.jar"/>
+			<classpath file="dist/duix.jar"/>
 			<classpath file="lib/pdfbox-app-2.0.3.jar"/>
 			<option value="-Dapple.laf.useScreenMenuBar=true"/>
 			<option value="-Duser.dir=$APP_ROOT/Contents/Home/"/>
@@ -23,6 +26,12 @@
 		<exec executable="hdiutil">
 			<arg line="create -srcfolder dist/Duix.app dist/Duix.dmg"/>
 		</exec>
+		
+		<!-- Copy to http://tinyurl.com/duixapp -->
+		<delete file="/Users/dkolovos/Google Drive/Public/Duix/duix.jar"/>
+		<delete file="/Users/dkolovos/Google Drive/Public/Duix/Duix.dmg"/>
+		<copy tofile="/Users/dkolovos/Google Drive/Public/Duix/Duix.dmg" file="dist/Duix.dmg"/>
+		<copy tofile="/Users/dkolovos/Google Drive/Public/Duix/duix.jar" file="dist/duix.jar"/>
 		
 	</target>
 

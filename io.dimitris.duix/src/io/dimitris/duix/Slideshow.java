@@ -16,6 +16,7 @@ public class Slideshow {
 	protected PDDocument document;
 	protected boolean hasNotes = false;
 	protected boolean fullscreen = true;
+	protected boolean swapScreens = false;
 	
 	public Slideshow(File pdf) throws Exception {
 		document = PDDocument.load(pdf);
@@ -74,8 +75,14 @@ public class Slideshow {
 			GraphicsDevice[] gs = ge.getScreenDevices();
 			
 			if (gs.length > 1) {
-				notesFrame.showOnScreen(1);
-				slidesFrame.showOnScreen(2);
+				if (swapScreens) {
+					slidesFrame.showOnScreen(1);
+					notesFrame.showOnScreen(2);
+				}
+				else {
+					notesFrame.showOnScreen(1);
+					slidesFrame.showOnScreen(2);
+				}
 			}
 			else {
 				slidesFrame.showOnScreen(1);
@@ -117,4 +124,13 @@ public class Slideshow {
 	public void setFullscreen(boolean fullscreen) {
 		this.fullscreen = fullscreen;
 	}
+
+	public void setSwapScreens(boolean swapScreeens) {
+		this.swapScreens = swapScreeens;
+	}
+	
+	public boolean isSwapScreens() {
+		return swapScreens;
+	}
+	
 }

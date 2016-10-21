@@ -11,6 +11,7 @@ public class ResumeSlideshowAction extends AppAction {
 	public void actionPerformed() throws Exception {
 		if (app.getSlideshow().canResume()) {
 			app.getSlideshow().setFullscreen(app.isFullscreen());
+			app.getSlideshow().setSwapScreens(app.isSwapScreeens());
 			app.getSlideshow().resume();
 		}
 		else {
