@@ -9,7 +9,7 @@ Keyboard shortcuts
 
 Troubleshooting
 ---
-* **My 1st/2nd screen is blank after starting a slideshow**: This can happen with some projectors (not sure why) when Duix goes fullscreen. As a workaround, you can stop the slideshow, de-select the Fullscreen option in the Slideshow menu and start the slideshow again. This time, two regular windows with the slides/notes will pop up which you can move/resize them manually as you see fit.
+* **My 1st/2nd screen goes blank after starting a slideshow**: This can happen with some projectors (not sure why) when Duix goes fullscreen. As a workaround, you can stop the slideshow, de-select the Fullscreen option in the Slideshow menu and start the slideshow again. This time, two regular windows with the slides/notes will pop up which you can move/resize them manually as you see fit.
 * **Duix shows my slides/notes on the wrong screen**: For equally inexplicable (so far) reasons, some times Duix will show your notes on the projector and the slides on your computer's screen. As a workaround, you can stop the slideshow, select the Swap screens option in the Slideshow menu, and start the slideshow again.
 
 Minimal Beamer presentation with notes on second screen
