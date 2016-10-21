@@ -14,6 +14,7 @@ Troubleshooting
 
 Minimal Beamer presentation with notes on second screen
 ---
+A PDF compiled from the LaTeX code below is [available here](https://drive.google.com/open?id=0BxVF3EZ8Xel-Ynd4cTFPT05PMkU).
 ```tex
 \documentclass{beamer}
 \usepackage{pgfpages}
