@@ -7,6 +7,10 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +42,7 @@ public class SlideFrame extends JFrame {
 			}
 		}, KeyEvent.VK_ESCAPE, KeyEvent.VK_Q);
 		
-		addKeyAction(new AbstractAction() {
+		final Action nextAction = new AbstractAction() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -46,9 +50,10 @@ public class SlideFrame extends JFrame {
 					listener.next();;
 				}
 			}
-		}, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_SPACE);
+		};
+		addKeyAction(nextAction, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_SPACE);
 		
-		addKeyAction(new AbstractAction() {
+		final Action previousAction = new AbstractAction() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -56,7 +61,8 @@ public class SlideFrame extends JFrame {
 					listener.previous();
 				}
 			}
-		}, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_BACK_SPACE);
+		};
+		addKeyAction(previousAction, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_BACK_SPACE);
 		
 		addKeyAction(new AbstractAction() {
 			
@@ -67,6 +73,37 @@ public class SlideFrame extends JFrame {
 				}
 			}
 		}, KeyEvent.VK_B, KeyEvent.VK_PERIOD);
+		
+		addMouseListener(new DefaultMouseListener(){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					nextAction.actionPerformed(null);
+				}
+				else if (e.getButton() == MouseEvent.BUTTON3) {
+					previousAction.actionPerformed(null);
+				}
+			}
+		});
+		
+		addMouseWheelListener(new MouseWheelListener() {
+			
+			@Override
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				if (e.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
+					if (e.getUnitsToScroll() < 0) {
+						for (int i = 0; i < -e.getUnitsToScroll(); i++) {
+							previousAction.actionPerformed(null);
+						}
+					}
+					else {
+						for (int i = 0; i < e.getUnitsToScroll(); i++) {
+							nextAction.actionPerformed(null);
+						}
+					}
+				}
+			}
+		});
 		
 	}
 	
