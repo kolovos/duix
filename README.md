@@ -4,8 +4,8 @@ Keyboard shortcuts
 ---
 * <kbd>&rightarrow;</kbd>, <kbd>&downarrow;</kbd>, <kbd>space</kbd>: Next slide
 * <kbd>&leftarrow;</kbd>, <kbd>&uparrow;</kbd>, <kbd>backspace</kbd>: Previous slide
-* <kbd>B</kbd>: Blank/unblank screen
-* <kbd>esc</kbd>: Exit
+* <kbd>B</kbd>, <kbd>.</kbd>: Blank/unblank screen
+* <kbd>esc</kbd>, <kbd>Q</kbd>: Exit
 
 Troubleshooting
 ---
