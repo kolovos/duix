@@ -54,7 +54,9 @@ public class Slideshow {
 			slidesFrame.addSlideshowCommandListener(externalListener);
 			notesFrame.addSlideshowCommandListener(externalListener);
 		}
-		
+
+		slidesFrame.setUndecorated(fullscreen);
+		notesFrame.setUndecorated(fullscreen);
 	    resume();
 		
 	}
@@ -75,7 +77,7 @@ public class Slideshow {
 			GraphicsDevice[] gs = ge.getScreenDevices();
 			
 			if (gs.length > 1) {
-				if (swapScreens) {
+				if (!swapScreens) {
 					slidesFrame.showOnScreen(1);
 					notesFrame.showOnScreen(2);
 				}

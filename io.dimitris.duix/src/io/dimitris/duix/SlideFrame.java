@@ -2,6 +2,7 @@ package io.dimitris.duix;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
@@ -23,7 +24,7 @@ public class SlideFrame extends JFrame {
 	public SlideFrame(final SlidePanel slidePanel) {
 		super();
 		this.slidePanel = slidePanel;
-		//this.setUndecorated(true);
+		this.setUndecorated(true);
 		getRootPane().setLayout(new BorderLayout());
 		getRootPane().add(slidePanel, BorderLayout.CENTER);
 		getRootPane().setBackground(Color.black);
@@ -41,8 +42,6 @@ public class SlideFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//slidePanel.showNext();
-				//if (counterpart != null) counterpart.getSlidePanel().showNext();
 				for (SlideshowCommandListener listener : slideshowCommandListeners) {
 					listener.next();;
 				}
@@ -53,8 +52,6 @@ public class SlideFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//slidePanel.showPrevious();
-				//if (counterpart != null) counterpart.getSlidePanel().showPrevious();
 				for (SlideshowCommandListener listener : slideshowCommandListeners) {
 					listener.previous();
 				}
@@ -65,7 +62,6 @@ public class SlideFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//if (isPublic()) getSlidePanel().setBlank(!getSlidePanel().isBlank());
 				for (SlideshowCommandListener listener : slideshowCommandListeners) {
 					listener.blank();
 				}
@@ -98,9 +94,7 @@ public class SlideFrame extends JFrame {
 	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	    GraphicsDevice[] gs = ge.getScreenDevices();
 	    
-	    //System.out.println(gs.length);
-	    
-	    
+	    this.setState(Frame.NORMAL);
 	    if( screen > -1 && screen < gs.length ) {
 	        gs[screen].setFullScreenWindow(this);
 	    }
