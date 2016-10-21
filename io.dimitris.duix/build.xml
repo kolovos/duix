@@ -5,8 +5,9 @@
 
 	<target name="default">
 
-		<jar destfile="dist/duix.jar">
+		<jar destfile="dist/duix.jar" filesetmanifest="mergewithoutmain">
 			<fileset dir="bin"/>
+			<zipfileset excludes="META-INF/*.SF" src="lib/pdfbox-app-2.0.3.jar"/>
 			<manifest>
 				<attribute name="Main-Class" value="io.dimitris.duix.ui.Duix"/>
 			</manifest>
@@ -17,7 +18,7 @@
 
 		<bundleapp outputdirectory="dist" name="Duix" displayname="Duix" identifier="Duix" mainclassname="io.dimitris.duix.ui.Duix" icon="resources/duix.icns">
 			<classpath file="dist/duix.jar"/>
-			<classpath file="lib/pdfbox-app-2.0.3.jar"/>
+			<!--classpath file="lib/pdfbox-app-2.0.3.jar"/-->
 			<option value="-Dapple.laf.useScreenMenuBar=true"/>
 			<option value="-Duser.dir=$APP_ROOT/Contents/Home/"/>
 			<!--option value="-Dapple.awt.UIElement=true"/-->
