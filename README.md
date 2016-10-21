@@ -43,3 +43,6 @@ Minimal Beamer presentation with notes on second screen
 
 \end{document}
 ```
+Download
+---
+You can download the latest version of Duix from http://tinyurl.com/duixapp. If you are on Mac OS X, you can download `Duix.dmg`; for all other operating systems you can download `duix.jar` (executable jar).
