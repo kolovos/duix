@@ -2,8 +2,8 @@ Duix is a Java-based dual-screen PDF viewer, mainly targeted at Beamer presentat
 
 Keyboard shortcuts
 ---
-* <kbd>&rightarrow;</kbd>, <kbd>&downarrow;</kbd>, <kbd>space</kbd>: Next slide
-* <kbd>&leftarrow;</kbd>, <kbd>&uparrow;</kbd>, <kbd>backspace</kbd>: Previous slide
+* Left click, mouse wheel scroll down, <kbd>&rightarrow;</kbd>, <kbd>&downarrow;</kbd>, <kbd>space</kbd>: Next slide
+* Right click, mouse wheel scroll up, <kbd>&leftarrow;</kbd>, <kbd>&uparrow;</kbd>, <kbd>backspace</kbd>: Previous slide
 * <kbd>B</kbd>, <kbd>.</kbd>: Blank/unblank screen
 * <kbd>esc</kbd>, <kbd>Q</kbd>: Exit
 
