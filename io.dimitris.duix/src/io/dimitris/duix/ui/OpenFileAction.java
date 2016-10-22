@@ -39,8 +39,6 @@ public class OpenFileAction extends AppAction {
 			fileDialog.setVisible(true);
 			
 			if (fileDialog.getFile() != null) {
-				File f = fileDialog.getFiles()[0];
-				
 				if (fileDialog.getDirectory() == null) {
 					// See https://bugs.openjdk.java.net/browse/JDK-7132194
 					JOptionPane.showMessageDialog(null, "Please select the file again, from its directory (not from recent files / search). \n To stop receiving this message, please update your Java installation.", "Cannot open file", JOptionPane.ERROR_MESSAGE);
