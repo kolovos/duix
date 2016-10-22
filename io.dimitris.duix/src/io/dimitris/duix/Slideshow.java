@@ -16,28 +16,37 @@ public class Slideshow {
 	
 	protected SlideFrame slidesFrame;
 	protected SlideFrame notesFrame;
-	protected PDDocument document;
-	protected boolean hasNotes = false;
 	protected boolean fullscreen = true;
 	protected boolean swapScreens = false;
 	protected ArrayList<Slide> slides = new ArrayList<Slide>();
 	protected ArrayList<Slide> notes = new ArrayList<Slide>();
+	protected ArrayList<Slide> thumbnails = new ArrayList<Slide>();
 	
 	public Slideshow(File pdf) throws Exception {
-		document = PDDocument.load(pdf);
+		PDDocument document = PDDocument.load(pdf);
 		PDRectangle rectangle = document.getPage(0).getMediaBox();
+		boolean hasNotes = false;
 		if (rectangle.getWidth() > rectangle.getHeight() * 2) { hasNotes = true; };
 		PDFRenderer renderer = new PDFRenderer(document);
 		
 		for (int i=0;i<document.getNumberOfPages();i++) {
 			slides.add(new PDFSlide(renderer, i, hasNotes, true));
+			thumbnails.add(new PDFSlide(renderer, i, hasNotes, true));
 			notes.add(new PDFSlide(renderer, i, hasNotes, false));
 		}
+		
+//		slides.add(0, new HTMLSlide());
+//		notes.add(0, new HTMLSlide());
+//		thumbnails.add(0, new HTMLSlide());
 		
 	}
 	
 	public List<Slide> getSlides() {
 		return slides;
+	}
+	
+	public ArrayList<Slide> getThumbnails() {
+		return thumbnails;
 	}
 	
 	public void start(SlideshowCommandListener externalListener) throws Exception {
@@ -76,14 +85,6 @@ public class Slideshow {
 		notesFrame.setUndecorated(fullscreen);
 	    resume();
 		
-	}
-	
-	public boolean hasNotes() {
-		return hasNotes;
-	}
-	
-	public PDDocument getDocument() {
-		return document;
 	}
 	
 	public void resume() {

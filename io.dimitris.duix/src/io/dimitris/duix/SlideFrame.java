@@ -30,7 +30,7 @@ public class SlideFrame extends JFrame {
 		this.setUndecorated(true);
 		getRootPane().setLayout(new BorderLayout());
 		getRootPane().add(slidePanel, BorderLayout.CENTER);
-		getRootPane().setBackground(Color.black);
+		
 		addKeyAction(new AbstractAction() {
 			
 			@Override
