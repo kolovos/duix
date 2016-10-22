@@ -52,3 +52,12 @@ A PDF compiled from the LaTeX code below is [available here](https://drive.googl
 Download
 ---
 You can download the latest version of Duix from http://tinyurl.com/duixapp. If you are on Mac OS X, you can download `Duix.dmg`; for all other operating systems you can download `duix.jar` (executable jar).
+
+Screenshots
+---
+###Mac OS X###
+![Duix in Mac OS X El Capitan](https://raw.githubusercontent.com/wiki/kolovos/duix/images/screenshots/mac-os-x.png)
+###Windows 7###
+![Duix in Windows 7](https://raw.githubusercontent.com/wiki/kolovos/duix/images/screenshots/windows.png)
+###Ubuntu###
+![Duix in Ubuntu](https://raw.githubusercontent.com/wiki/kolovos/duix/images/screenshots/ubuntu.png)
