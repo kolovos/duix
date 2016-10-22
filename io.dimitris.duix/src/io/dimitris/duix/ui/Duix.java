@@ -26,6 +26,7 @@ import javax.swing.border.Border;
 public class Duix {
 	
 	protected JPanel dropTarget;
+	protected FileDrop fileDrop;
 	protected JFrame main;
 	protected Slideshow slideshow;
 	protected SlidePanel previewPanel;
@@ -33,6 +34,10 @@ public class Duix {
 	protected CheckboxMenuItem fullscreenMenuItem = null;
 	protected CheckboxMenuItem swapScreensMenuItem = null;
 	protected List<ActionMenuItem> actionMenuItems = new ArrayList<ActionMenuItem>();
+	protected StartSlideshowAction startSlideshowAction;
+	protected StopSlideshowAction slideshowAction;
+	protected ResumeSlideshowAction resumeSlideshowAction;
+	protected OpenFileAction openFileAction;
 	
 	public static void main(String[] args) throws Exception {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -51,16 +56,16 @@ public class Duix {
 		
 		dropTarget = new JPanel();
 		dropTarget.setLayout(new BorderLayout());
-		Border dashedBorder = BorderFactory.createDashedBorder(Color.GRAY, 2, 3, 2, true);
-		Border activeDashedBorder = BorderFactory.createDashedBorder(Color.LIGHT_GRAY, 2, 3, 2, true);
-		Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
-		dropTarget.setBorder(BorderFactory.createCompoundBorder(emptyBorder, dashedBorder));
+		//Border dashedBorder = BorderFactory.createDashedBorder(Color.GRAY, 2, 3, 2, true);
+		//Border activeDashedBorder = BorderFactory.createDashedBorder(Color.LIGHT_GRAY, 2, 3, 2, true);
+		//Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+		//dropTarget.setBorder(BorderFactory.createCompoundBorder(emptyBorder, dashedBorder));
 		final JLabel dropTargetLabel = new JLabel("Go to File->Open... or drop PDF slides here.", SwingConstants.CENTER);
 		
 		dropTarget.add(dropTargetLabel, BorderLayout.CENTER);
 		main.getRootPane().add(dropTarget, BorderLayout.CENTER);
 		
-		new  FileDrop(dropTarget, BorderFactory.createCompoundBorder(emptyBorder, activeDashedBorder), new FileDrop.Listener() {   
+		fileDrop = new  FileDrop(dropTarget, null, new FileDrop.Listener() {   
 			public void  filesDropped( java.io.File[] files ) {   
 		          if (files[0].getName().endsWith("pdf")) {
 		        	  try { new OpenFileAction(Duix.this, files[0]).actionPerformed(null); }
@@ -84,13 +89,16 @@ public class Duix {
 		
 		// File menu
 		Menu fileMenu = new PopupMenu("File");
-		fileMenu.add(new ActionMenuItem(this, new OpenFileAction(this, null)));
+		openFileAction = new OpenFileAction(this, null);
+		fileMenu.add(new ActionMenuItem(this, openFileAction));
 		menuBar.add(fileMenu);
 		
 		// Slideshow menu
 		Menu slideshowMenu = new PopupMenu("Slideshow");
-		slideshowMenu.add(new ActionMenuItem(this, new StartSlideshowAction(this)));
-		slideshowMenu.add(new ActionMenuItem(this, new ResumeSlideshowAction(this)));
+		startSlideshowAction = new StartSlideshowAction(this);
+		slideshowMenu.add(new ActionMenuItem(this, startSlideshowAction));
+		resumeSlideshowAction = new ResumeSlideshowAction(this);
+		slideshowMenu.add(new ActionMenuItem(this, resumeSlideshowAction));
 		slideshowMenu.addSeparator();
 		fullscreenMenuItem = new CheckboxMenuItem("Fullscreen", true);
 		slideshowMenu.add(fullscreenMenuItem);
@@ -108,6 +116,7 @@ public class Duix {
 	public void setSlideshow(Slideshow slideshow) {
 		this.slideshow = slideshow;
 		previewPanel = new SlidePanel(slideshow.getDocument(), slideshow.hasNotes(), true);
+		previewPanel.setBackground(Color.BLACK);
 		dropTarget.removeAll();
 		dropTarget.add(previewPanel, BorderLayout.CENTER);
 		dropTarget.updateUI();

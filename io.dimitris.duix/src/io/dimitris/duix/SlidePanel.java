@@ -1,5 +1,6 @@
 package io.dimitris.duix;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -78,6 +79,11 @@ public class SlidePanel extends JComponent {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (blank) return;
+        
+        if (getBackground() != null) {
+	        g.setColor(getBackground());
+	        g.fillRect(0, 0, getWidth(), getHeight());
+        }
         
         BufferedImage image;
 	    try {

@@ -389,7 +389,8 @@ public class FileDrop
                 }   // end drop
 
                 public void dragExit( java.awt.dnd.DropTargetEvent evt ) 
-                {   log( out, "FileDrop: dragExit event." );
+                {   
+                	log( out, "FileDrop: dragExit event." );
                     // If it's a Swing component, reset its border
                     if( c instanceof javax.swing.JComponent )
                     {   javax.swing.JComponent jc = (javax.swing.JComponent) c;

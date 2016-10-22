@@ -21,9 +21,7 @@ public class ResumeSlideshowAction extends AppAction {
 	
 	@Override
 	public boolean isEnabled() {
-		System.out.println("Resume enabled?");
-		return app.getSlideshow() != null && 
-			app.getSlideshow().canResume();
+		return app.getSlideshow() != null;
 	}
 
 }

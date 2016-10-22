@@ -12,27 +12,42 @@
 				<attribute name="Main-Class" value="io.dimitris.duix.ui.Duix"/>
 			</manifest>
 		</jar>
+
+		<jar destfile="dist/duix4mac.jar">
+			<fileset dir="bin"/>
+		</jar>		
 		
 		<delete file="dist/Duix.dmg"/>
 		<delete dir="dist/Duix.app"/>
 
-		<bundleapp outputdirectory="dist" name="Duix" displayname="Duix" identifier="Duix" mainclassname="io.dimitris.duix.ui.Duix" icon="resources/duix.icns">
-			<classpath file="dist/duix.jar"/>
-			<!--classpath file="lib/pdfbox-app-2.0.3.jar"/-->
+		<bundleapp outputdirectory="dist" name="Duix" displayname="Duix" identifier="Duix" mainclassname="io.dimitris.duix.ui.Duix4Mac" icon="resources/duix.icns">
+			<classpath file="dist/duix4mac.jar"/>
+			<classpath file="lib/pdfbox-app-2.0.3.jar"/>
+			<classpath file="lib/forms-1.2.1.jar"/>
+			<!--classpath file="lib/commons-logging-1.1.jar"/-->
+			<classpath file="lib/quaqua.jar"/>
+			<classpath file="lib/MacWidgets.jar"/>
+			<!--classpath file="lib/forms.jar"/>
+			<classpath file="lib/JNativeHook.jar"/-->
+			<librarypath file="lib/libquaqua.jnilib"/>
+			<librarypath file="lib/libquaqua64.jnilib"/>
+			<librarypath file="lib/libquaqua64.dylib"/>			
 			<option value="-Dapple.laf.useScreenMenuBar=true"/>
 			<option value="-Duser.dir=$APP_ROOT/Contents/Home/"/>
 			<!--option value="-Dapple.awt.UIElement=true"/-->
 		</bundleapp>
+
+		<copydir src="resources" dest="dist/Duix.app/Contents/Home/resources"/>		
 		
 		<exec executable="hdiutil">
 			<arg line="create -srcfolder dist/Duix.app dist/Duix.dmg"/>
 		</exec>
 		
 		<!-- Copy to http://tinyurl.com/duixapp -->
-		<delete file="/Users/dkolovos/Google Drive/Public/Duix/duix.jar"/>
-		<delete file="/Users/dkolovos/Google Drive/Public/Duix/Duix.dmg"/>
-		<copy tofile="/Users/dkolovos/Google Drive/Public/Duix/Duix.dmg" file="dist/Duix.dmg"/>
-		<copy tofile="/Users/dkolovos/Google Drive/Public/Duix/duix.jar" file="dist/duix.jar"/>
+		<delete file="/Users/dkolovos/Google Drive/Public/Duix/bleeding-edge/duix.jar"/>
+		<delete file="/Users/dkolovos/Google Drive/Public/Duix/bleeding-edge/Duix.dmg"/>
+		<copy tofile="/Users/dkolovos/Google Drive/Public/Duix/bleeding-edge/Duix.dmg" file="dist/Duix.dmg"/>
+		<copy tofile="/Users/dkolovos/Google Drive/Public/Duix/bleeding-edge/duix.jar" file="dist/duix.jar"/>
 		
 	</target>
 

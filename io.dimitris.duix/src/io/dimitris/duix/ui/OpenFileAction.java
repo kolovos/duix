@@ -19,6 +19,9 @@ public class OpenFileAction extends AppAction {
 
 	@Override
 	public void actionPerformed() throws Exception {
+		
+		File pdf = null;
+		
 		if (file == null) {
 			FileDialog fileDialog = new FileDialog((Frame) null);
 			fileDialog.setFilenameFilter(new FilenameFilter() {
@@ -28,12 +31,15 @@ public class OpenFileAction extends AppAction {
 				}
 			});
 			fileDialog.setVisible(true);
-			file = fileDialog.getFiles()[0];
-			if (file == null) return;
+			pdf = fileDialog.getFiles()[0];
+			if (pdf == null) return;
+		}
+		else {
+			pdf = file;
 		}
 		
 		if (app.getSlideshow() != null) app.getSlideshow().stop();
-		app.setSlideshow(new Slideshow(file));
+		app.setSlideshow(new Slideshow(pdf));
 	}
 
 }
