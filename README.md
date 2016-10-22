@@ -55,9 +55,7 @@ You can download the latest version of Duix from http://tinyurl.com/duixapp. If 
 
 Screenshots
 ---
-###Mac OS X###
-![Duix in Mac OS X El Capitan](https://raw.githubusercontent.com/wiki/kolovos/duix/images/screenshots/mac-os-x.png)
-###Windows 7###
-![Duix in Windows 7](https://raw.githubusercontent.com/wiki/kolovos/duix/images/screenshots/windows.png)
-###Ubuntu###
+
+![Duix in Mac OS X El Capitan](https://raw.githubusercontent.com/wiki/kolovos/duix/images/screenshots/mac-os-x.png)   ![Duix in Windows 7](https://raw.githubusercontent.com/wiki/kolovos/duix/images/screenshots/windows.png)
+
 ![Duix in Ubuntu](https://raw.githubusercontent.com/wiki/kolovos/duix/images/screenshots/ubuntu.png)
