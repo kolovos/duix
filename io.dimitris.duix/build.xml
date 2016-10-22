@@ -44,10 +44,10 @@
 		</exec>
 		
 		<!-- Copy to http://tinyurl.com/duixapp -->
-		<delete file="/Users/dkolovos/Google Drive/Public/Duix/bleeding-edge/duix.jar"/>
+		<!--delete file="/Users/dkolovos/Google Drive/Public/Duix/bleeding-edge/duix.jar"/>
 		<delete file="/Users/dkolovos/Google Drive/Public/Duix/bleeding-edge/Duix.dmg"/>
 		<copy tofile="/Users/dkolovos/Google Drive/Public/Duix/bleeding-edge/Duix.dmg" file="dist/Duix.dmg"/>
-		<copy tofile="/Users/dkolovos/Google Drive/Public/Duix/bleeding-edge/duix.jar" file="dist/duix.jar"/>
+		<copy tofile="/Users/dkolovos/Google Drive/Public/Duix/bleeding-edge/duix.jar" file="dist/duix.jar"/-->
 		
 	</target>
 

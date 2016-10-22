@@ -3,27 +3,22 @@ package io.dimitris.duix;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
 @SuppressWarnings("serial")
 public class SlidePanel extends JComponent {
 	
-	protected PDDocument document;
-	protected PDFRenderer renderer;
 	protected int slideNumber = 0;
-	protected boolean left = true;
 	protected boolean blank = false;
-	protected boolean split = true;
+	protected List<Slide> slides;
 	
-	public SlidePanel(PDDocument document, boolean split, boolean left) {
-		this.document = document;
-		this.split = split;
-		this.left = left;
-		this.renderer = new PDFRenderer(document);
+	public SlidePanel(List<Slide> slides) {
+		this.slides = slides;
 	}
 	
 	public int getSlideNumber() {
@@ -31,7 +26,7 @@ public class SlidePanel extends JComponent {
 	}
 	
 	public boolean goToSlide(int slideNumber) {
-		if (slideNumber >= 0 && slideNumber < document.getNumberOfPages()) {
+		if (slideNumber >= 0 && slideNumber < slides.size()) {
 			this.slideNumber = slideNumber;
 			this.repaint();
 			return true;
@@ -58,22 +53,6 @@ public class SlidePanel extends JComponent {
 		goToSlide(getSlideNumber() - 1);
 	}
 	
-	public void setLeft(boolean left) {
-		this.left = left;
-	}
-	
-	public boolean isLeft() {
-		return left;
-	}
-	
-	public boolean isSplit() {
-		return split;
-	}
-	
-	public void setSplit(boolean split) {
-		this.split = split;
-	}
-	
 	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -84,20 +63,35 @@ public class SlidePanel extends JComponent {
 	        g.fillRect(0, 0, getWidth(), getHeight());
         }
         
-        BufferedImage image;
+        Slide slide = slides.get(slideNumber);
+        
+        if (slide instanceof PDFSlide) {
+        	paint((PDFSlide) slide, g);
+        }
+        
+        
+    }
+	
+	protected void paint(PDFSlide slide, Graphics g) {
+		BufferedImage image;
 	    try {
 	    	//TODO: See if the width/height of the page can be computed as follows to avoid rendering multiple times
 	    	// int originalWidth = (int) document.getPage(slideNumber).getMediaBox().getWidth();
 	    	//TODO: Add support for non-split slides
-	        image = renderer.renderImage(slideNumber);
+	        PDFRenderer renderer = slide.getRenderer();
+	        boolean split = slide.isSplit();
+	        boolean left = slide.isLeft();
+	        int pageNumber = slide.getPageNumber();
+	        
+	    	image = renderer.renderImage(pageNumber);
 	        int originalWidth = image.getWidth();
 	        int originalHeight = image.getHeight();
 	        int parts = 1;
 	        if (split) { parts = 2; };
 	        
-			image = renderer.renderImage(slideNumber, parts*(float)getWidth()/originalWidth);
+			image = renderer.renderImage(pageNumber, parts*(float)getWidth()/originalWidth);
 			if (image.getHeight() > this.getHeight()) {
-				image = renderer.renderImage(slideNumber, (float) getHeight()/originalHeight);
+				image = renderer.renderImage(pageNumber, (float) getHeight()/originalHeight);
 			}
 			
 			BufferedImage drawable = image;
@@ -126,8 +120,6 @@ public class SlidePanel extends JComponent {
         catch (Exception ex) {
         	ex.printStackTrace();
         }
-        
-        
-    }
+	}
 	
 }

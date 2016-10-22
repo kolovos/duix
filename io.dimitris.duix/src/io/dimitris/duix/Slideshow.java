@@ -5,9 +5,12 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.rendering.PDFRenderer;
 
 public class Slideshow {
 	
@@ -17,17 +20,31 @@ public class Slideshow {
 	protected boolean hasNotes = false;
 	protected boolean fullscreen = true;
 	protected boolean swapScreens = false;
+	protected ArrayList<Slide> slides = new ArrayList<Slide>();
+	protected ArrayList<Slide> notes = new ArrayList<Slide>();
 	
 	public Slideshow(File pdf) throws Exception {
 		document = PDDocument.load(pdf);
 		PDRectangle rectangle = document.getPage(0).getMediaBox();
 		if (rectangle.getWidth() > rectangle.getHeight() * 2) { hasNotes = true; };
+		PDFRenderer renderer = new PDFRenderer(document);
+		
+		for (int i=0;i<document.getNumberOfPages();i++) {
+			slides.add(new PDFSlide(renderer, i, hasNotes, true));
+			notes.add(new PDFSlide(renderer, i, hasNotes, false));
+		}
+		
+	}
+	
+	public List<Slide> getSlides() {
+		return slides;
 	}
 	
 	public void start(SlideshowCommandListener externalListener) throws Exception {
 		
-		slidesFrame = new SlideFrame(new SlidePanel(document, hasNotes, true));
-		notesFrame = new SlideFrame(new SlidePanel(document, hasNotes, false));
+		slidesFrame = new SlideFrame(new SlidePanel(slides));
+		notesFrame = new SlideFrame(new SlidePanel(notes));
+		
 		slidesFrame.setSize(400, 400);
 		notesFrame.setSize(400, 400);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();

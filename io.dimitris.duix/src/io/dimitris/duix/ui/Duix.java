@@ -115,7 +115,7 @@ public class Duix {
 	
 	public void setSlideshow(Slideshow slideshow) {
 		this.slideshow = slideshow;
-		previewPanel = new SlidePanel(slideshow.getDocument(), slideshow.hasNotes(), true);
+		previewPanel = new SlidePanel(slideshow.getSlides());
 		previewPanel.setBackground(Color.BLACK);
 		dropTarget.removeAll();
 		dropTarget.add(previewPanel, BorderLayout.CENTER);
