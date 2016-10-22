@@ -47,8 +47,6 @@ public class Duix4Mac extends Duix {
 		main.getRootPane().add(toolbar.getComponent(), BorderLayout.NORTH);
 		main.getRootPane().putClientProperty("apple.awt.brushMetalLook", true);
 		
-		dropTarget.setOpaque(true);
-		dropTarget.setBackground(Color.WHITE);
 	}
 	
 	protected AbstractButton getUnifiedToolBarButton(AbstractAction action) {

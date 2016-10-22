@@ -31,8 +31,14 @@ public class OpenFileAction extends AppAction {
 				}
 			});
 			fileDialog.setVisible(true);
-			pdf = fileDialog.getFiles()[0];
-			if (pdf == null) return;
+			
+			if (fileDialog.getFiles().length > 0) {
+				pdf = fileDialog.getFiles()[0];
+			}
+			else {
+				return;
+			}
+			
 		}
 		else {
 			pdf = file;

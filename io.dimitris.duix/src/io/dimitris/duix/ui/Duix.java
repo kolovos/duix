@@ -56,6 +56,8 @@ public class Duix {
 		
 		dropTarget = new JPanel();
 		dropTarget.setLayout(new BorderLayout());
+		dropTarget.setOpaque(true);
+		dropTarget.setBackground(Color.WHITE);
 		//Border dashedBorder = BorderFactory.createDashedBorder(Color.GRAY, 2, 3, 2, true);
 		//Border activeDashedBorder = BorderFactory.createDashedBorder(Color.LIGHT_GRAY, 2, 3, 2, true);
 		//Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
