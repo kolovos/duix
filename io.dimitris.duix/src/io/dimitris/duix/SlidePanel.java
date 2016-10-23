@@ -25,9 +25,10 @@ public class SlidePanel extends JComponent {
 	
 	public boolean goToSlide(int slideNumber) {
 		if (slideNumber >= 0 && slideNumber < slides.size()) {
-			if (this.slideNumber >= 0) slides.get(this.slideNumber).uninstall(this);
+			if (this.slideNumber >= 0) slides.get(this.slideNumber).detach(this);
 			this.slideNumber = slideNumber;
-			slides.get(slideNumber).install(this);
+			slides.get(slideNumber).attach(this);
+			doLayout();
 			this.repaint();
 			return true;
 		}
