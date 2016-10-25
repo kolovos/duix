@@ -6,6 +6,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -34,25 +36,24 @@ public class Slideshow {
 			thumbnails.add(new PDFSlide(renderer, i, hasNotes, true));
 			notes.add(new PDFSlide(renderer, i, hasNotes, false));
 		}
-//		ChartSlide chartSlide = createChartSlide();
-//		slides.add(1, chartSlide);
-//		notes.add(1, chartSlide);
-//		thumbnails.add(1, chartSlide);
-		
+//		PollSlide chartSlide = createPollSlide();
+//		slides.add(0, chartSlide);
+//		notes.add(0, chartSlide);
+//		thumbnails.add(0, chartSlide);
 	}
 	
-//	protected ChartSlide createChartSlide() {
-//		HashMap<String, Integer> options = new LinkedHashMap<String, Integer>();
-//		options.put("Monday", 0);
-//		options.put("Tuesday", 0);
-//		options.put("Wednesday", 0);
-//		options.put("Thursday", 0);
-//		options.put("Friday", 0);
-//		options.put("Saturday", 0);
-//		options.put("Sunday", 0);
-//		
-//		return new ChartSlide("Favourite Day of the Week", "", "", options);
-//	}
+	protected PollSlide createPollSlide() {
+		HashMap<String, Integer> options = new LinkedHashMap<String, Integer>();
+		options.put("Monday", 0);
+		options.put("Tuesday", 0);
+		options.put("Wednesday", 0);
+		options.put("Thursday", 0);
+		options.put("Friday", 0);
+		options.put("Saturday", 0);
+		options.put("Sunday", 0);
+		
+		return new PollSlide("Favourite Day of the Week", "", "", options);
+	}
 	
 	public List<Slide> getSlides() {
 		return slides;

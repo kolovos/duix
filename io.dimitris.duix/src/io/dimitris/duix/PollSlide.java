@@ -20,10 +20,11 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class ChartSlide extends Slide {
+public class PollSlide extends Slide {
 	
 	protected DefaultCategoryDataset dataset;
 	protected HashMap<String, Integer> options;
@@ -31,7 +32,7 @@ public class ChartSlide extends Slide {
 	protected String xAxis;
 	protected String yAxis;
 	
-	public ChartSlide(String title, String xAxis, String yAxis, HashMap<String, Integer> options) {
+	public PollSlide(String title, String xAxis, String yAxis, HashMap<String, Integer> options) {
 		this.title = title;
 		this.xAxis = xAxis;
 		this.yAxis = yAxis;
@@ -84,15 +85,18 @@ public class ChartSlide extends Slide {
     }
 
     private static JFreeChart createChart(CategoryDataset dataset, String title, String xaxis, String yaxis) {
-        JFreeChart chart = ChartFactory.createBarChart(title, null, yaxis, dataset);
+        JFreeChart chart = ChartFactory.createBarChart/*3D*/(title, null, yaxis, dataset);
         chart.setBackgroundPaint(Color.white);
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
-
+        
         NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         BarRenderer renderer = (BarRenderer) plot.getRenderer();
-        renderer.setDrawBarOutline(false);
+        renderer.setBarPainter(new StandardBarPainter());
+        //renderer.setDrawBarOutline(false);
+        //renderer.setSeriesPaint(1, Color.BLACK);
         chart.getLegend().setFrame(BlockBorder.NONE);
+        
         return chart;
     }
     

@@ -14,16 +14,12 @@
 				<attribute name="Main-Class" value="io.dimitris.duix.ui.Duix"/>
 			</manifest>
 		</jar>
-
-		<jar destfile="dist/duix4mac.jar">
-			<fileset dir="bin"/>
-		</jar>		
-		
+	
 		<delete file="dist/Duix.dmg"/>
 		<delete dir="dist/Duix.app"/>
 
 		<bundleapp outputdirectory="dist" name="Duix" displayname="Duix" identifier="Duix" mainclassname="io.dimitris.duix.ui.Duix4Mac" icon="resources/duix.icns">
-			<classpath file="dist/duix4mac.jar"/>
+			<classpath file="dist/duix.jar"/>
 			<classpath file="lib/forms-1.2.1.jar"/>
 			<classpath file="lib/quaqua.jar"/>
 			<classpath file="lib/MacWidgets.jar"/>
