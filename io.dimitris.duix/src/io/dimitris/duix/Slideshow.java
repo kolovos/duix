@@ -6,6 +6,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -35,11 +36,18 @@ public class Slideshow {
 			notes.add(new PDFSlide(renderer, i, hasNotes, false));
 		}
 		
-//		slides.add(0, new HTMLSlide());
-//		notes.add(0, new HTMLSlide());
-//		thumbnails.add(0, new HTMLSlide());
+//		slides.add(0, createChartSlide());
+//		notes.add(0, createChartSlide());
+//		thumbnails.add(0, createChartSlide());
 		
 	}
+	
+//	protected ChartSlide createChartSlide() {
+//		HashMap<String, Integer> options = new HashMap<String, Integer>();
+//		options.put("Male", 0);
+//		options.put("Female", 0);
+//		return new ChartSlide("Gender", "", "", options);
+//	}
 	
 	public List<Slide> getSlides() {
 		return slides;

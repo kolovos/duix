@@ -8,6 +8,8 @@
 		<jar destfile="dist/duix.jar" filesetmanifest="mergewithoutmain">
 			<fileset dir="bin"/>
 			<zipfileset excludes="META-INF/*.SF" src="lib/pdfbox-app-2.0.3.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="lib/jcommon-1.0.23.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="lib/jfreechart-1.0.19.jar"/>
 			<manifest>
 				<attribute name="Main-Class" value="io.dimitris.duix.ui.Duix"/>
 			</manifest>
@@ -22,7 +24,6 @@
 
 		<bundleapp outputdirectory="dist" name="Duix" displayname="Duix" identifier="Duix" mainclassname="io.dimitris.duix.ui.Duix4Mac" icon="resources/duix.icns">
 			<classpath file="dist/duix4mac.jar"/>
-			<classpath file="lib/pdfbox-app-2.0.3.jar"/>
 			<classpath file="lib/forms-1.2.1.jar"/>
 			<!--classpath file="lib/commons-logging-1.1.jar"/-->
 			<classpath file="lib/quaqua.jar"/>
