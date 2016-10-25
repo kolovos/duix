@@ -25,17 +25,13 @@
 		<bundleapp outputdirectory="dist" name="Duix" displayname="Duix" identifier="Duix" mainclassname="io.dimitris.duix.ui.Duix4Mac" icon="resources/duix.icns">
 			<classpath file="dist/duix4mac.jar"/>
 			<classpath file="lib/forms-1.2.1.jar"/>
-			<!--classpath file="lib/commons-logging-1.1.jar"/-->
 			<classpath file="lib/quaqua.jar"/>
 			<classpath file="lib/MacWidgets.jar"/>
-			<!--classpath file="lib/forms.jar"/>
-			<classpath file="lib/JNativeHook.jar"/-->
 			<librarypath file="lib/libquaqua.jnilib"/>
 			<librarypath file="lib/libquaqua64.jnilib"/>
 			<librarypath file="lib/libquaqua64.dylib"/>			
 			<option value="-Dapple.laf.useScreenMenuBar=true"/>
 			<option value="-Duser.dir=$APP_ROOT/Contents/Home/"/>
-			<!--option value="-Dapple.awt.UIElement=true"/-->
 		</bundleapp>
 
 		<copydir src="resources" dest="dist/Duix.app/Contents/Home/resources"/>		

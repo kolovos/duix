@@ -2,6 +2,7 @@ package io.dimitris.duix;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -25,7 +26,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
 public class ChartSlide extends Slide {
 	
 	protected DefaultCategoryDataset dataset;
-	protected ChartPanel chartPanel;
 	protected HashMap<String, Integer> options;
 	protected String title;
 	protected String xAxis;
@@ -36,24 +36,25 @@ public class ChartSlide extends Slide {
 		this.xAxis = xAxis;
 		this.yAxis = yAxis;
 		this.options = options;
+		dataset = createDataset();
 	}
 	
 	@Override
 	public void attach(SlidePanel slidePanel) {
-        dataset = createDataset();
         JFreeChart chart = createChart(dataset, title, xAxis, yAxis);
-        chartPanel = new ChartPanel(chart, false);
-        
+        final ChartPanel chartPanel = new ChartPanel(chart, false);
+        chartPanel.setFont(new Font("Monaco", Font.PLAIN, 14));
         for (int i=0;i<9;i++) {
         	final int index = i;
         	final int keyEvent = KeyEvent.VK_1 + i;
-	        addKeyAction(new AbstractAction() {
+	        addKeyAction(chartPanel, new AbstractAction() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					ArrayList<String> optionNames = new ArrayList<String>(options.keySet());
 					options.put(optionNames.get(index), options.get(optionNames.get(index)) + 1);
-					dataset.addValue((double)options.get(optionNames.get(index)), "", optionNames.get(index));
+					dataset.addValue((double)options.get(optionNames.get(index)), optionNames.get(index), "");
+					chartPanel.updateUI();
 				}
 			}, keyEvent);
         }
@@ -66,7 +67,7 @@ public class ChartSlide extends Slide {
 		slidePanel.removeAll();
 	}
 	
-	public void addKeyAction(Action action, int... keyEvents) {
+	public void addKeyAction(ChartPanel chartPanel, Action action, int... keyEvents) {
 		for (int keyEvent : keyEvents) {
 			KeyStroke keyStroke = KeyStroke.getKeyStroke(keyEvent, 0);
 			chartPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyStroke, keyEvent + "");
@@ -77,7 +78,7 @@ public class ChartSlide extends Slide {
 	private DefaultCategoryDataset createDataset() {
         dataset = new DefaultCategoryDataset();
         for (String option : options.keySet()) {
-        	dataset.addValue(options.get(option), "", option);
+        	dataset.addValue(options.get(option), option, "");
         }
         return dataset;
     }

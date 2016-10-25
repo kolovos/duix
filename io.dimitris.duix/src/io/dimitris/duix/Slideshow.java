@@ -6,7 +6,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -35,18 +34,24 @@ public class Slideshow {
 			thumbnails.add(new PDFSlide(renderer, i, hasNotes, true));
 			notes.add(new PDFSlide(renderer, i, hasNotes, false));
 		}
-		
-//		slides.add(0, createChartSlide());
-//		notes.add(0, createChartSlide());
-//		thumbnails.add(0, createChartSlide());
+//		ChartSlide chartSlide = createChartSlide();
+//		slides.add(1, chartSlide);
+//		notes.add(1, chartSlide);
+//		thumbnails.add(1, chartSlide);
 		
 	}
 	
 //	protected ChartSlide createChartSlide() {
-//		HashMap<String, Integer> options = new HashMap<String, Integer>();
-//		options.put("Male", 0);
-//		options.put("Female", 0);
-//		return new ChartSlide("Gender", "", "", options);
+//		HashMap<String, Integer> options = new LinkedHashMap<String, Integer>();
+//		options.put("Monday", 0);
+//		options.put("Tuesday", 0);
+//		options.put("Wednesday", 0);
+//		options.put("Thursday", 0);
+//		options.put("Friday", 0);
+//		options.put("Saturday", 0);
+//		options.put("Sunday", 0);
+//		
+//		return new ChartSlide("Favourite Day of the Week", "", "", options);
 //	}
 	
 	public List<Slide> getSlides() {
