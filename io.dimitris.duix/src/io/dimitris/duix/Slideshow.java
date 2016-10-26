@@ -1,13 +1,14 @@
 package io.dimitris.duix;
 
+import io.dimitris.duix.external.ExternalSlide;
+import io.dimitris.duix.external.ExternalSlidesConfiguration;
+
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -31,28 +32,25 @@ public class Slideshow {
 		if (rectangle.getWidth() > rectangle.getHeight() * 2) { hasNotes = true; };
 		PDFRenderer renderer = new PDFRenderer(document);
 		
+		ExternalSlidesConfiguration configuration = new ExternalSlidesConfiguration(new File(pdf.getAbsolutePath() + ".duix"));
+		
 		for (int i=0;i<document.getNumberOfPages();i++) {
+			
+			List<ExternalSlide> externalSlides = configuration.getExtenralSlidesBefore(i);
+			slides.addAll(externalSlides);
+			thumbnails.addAll(externalSlides);
+			notes.addAll(externalSlides);
+			
 			slides.add(new PDFSlide(renderer, i, hasNotes, true));
 			thumbnails.add(new PDFSlide(renderer, i, hasNotes, true));
 			notes.add(new PDFSlide(renderer, i, hasNotes, false));
+			
+			externalSlides = configuration.getExtenralSlidesAfter(i);
+			slides.addAll(externalSlides);
+			thumbnails.addAll(externalSlides);
+			notes.addAll(externalSlides);
 		}
-//		PollSlide chartSlide = createPollSlide();
-//		slides.add(0, chartSlide);
-//		notes.add(0, chartSlide);
-//		thumbnails.add(0, chartSlide);
-	}
-	
-	protected PollSlide createPollSlide() {
-		HashMap<String, Integer> options = new LinkedHashMap<String, Integer>();
-		options.put("Monday", 0);
-		options.put("Tuesday", 0);
-		options.put("Wednesday", 0);
-		options.put("Thursday", 0);
-		options.put("Friday", 0);
-		options.put("Saturday", 0);
-		options.put("Sunday", 0);
 		
-		return new PollSlide("Favourite Day of the Week", "", "", options);
 	}
 	
 	public List<Slide> getSlides() {

@@ -10,6 +10,7 @@
 			<zipfileset excludes="META-INF/*.SF" src="lib/pdfbox-app-2.0.3.jar"/>
 			<zipfileset excludes="META-INF/*.SF" src="lib/jcommon-1.0.23.jar"/>
 			<zipfileset excludes="META-INF/*.SF" src="lib/jfreechart-1.0.19.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="lib/jdom-2.0.6.jar"/>
 			<manifest>
 				<attribute name="Main-Class" value="io.dimitris.duix.ui.Duix"/>
 			</manifest>

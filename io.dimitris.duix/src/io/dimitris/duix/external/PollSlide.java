@@ -1,4 +1,6 @@
-package io.dimitris.duix;
+package io.dimitris.duix.external;
+
+import io.dimitris.duix.SlidePanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,12 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
+import org.jdom2.Element;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -24,7 +28,7 @@ import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class PollSlide extends Slide {
+public class PollSlide extends ExternalSlide {
 	
 	protected DefaultCategoryDataset dataset;
 	protected HashMap<String, Integer> options;
@@ -32,20 +36,28 @@ public class PollSlide extends Slide {
 	protected String xAxis;
 	protected String yAxis;
 	
-	public PollSlide(String title, String xAxis, String yAxis, HashMap<String, Integer> options) {
-		this.title = title;
-		this.xAxis = xAxis;
-		this.yAxis = yAxis;
-		this.options = options;
+	@Override
+	public void setConfiguration(Element configuration) {
+		super.setConfiguration(configuration);
+		this.title = configuration.getAttributeValue("title", "");
+		this.yAxis = configuration.getAttributeValue("yaxis", "");
+		this.xAxis = configuration.getAttributeValue("xaxis", "");
+		
+		options = new LinkedHashMap<String, Integer>();
+		for (Element optionElement : configuration.getChildren("option")) {
+			options.put(optionElement.getAttributeValue("name", ""), Integer.parseInt(optionElement.getAttributeValue("value", "0")));
+		}
 		dataset = createDataset();
 	}
 	
+	@SuppressWarnings("serial")
 	@Override
 	public void attach(SlidePanel slidePanel) {
+		
         JFreeChart chart = createChart(dataset, title, xAxis, yAxis);
         final ChartPanel chartPanel = new ChartPanel(chart, false);
         chartPanel.setFont(new Font("Monaco", Font.PLAIN, 14));
-        for (int i=0;i<9;i++) {
+        for (int i=0;i<options.keySet().size();i++) {
         	final int index = i;
         	final int keyEvent = KeyEvent.VK_1 + i;
 	        addKeyAction(chartPanel, new AbstractAction() {
