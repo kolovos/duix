@@ -56,7 +56,7 @@ public class PollSlide extends ExternalSlide {
 		
         JFreeChart chart = createChart(dataset, title, xAxis, yAxis);
         final ChartPanel chartPanel = new ChartPanel(chart, false);
-        chartPanel.setFont(new Font("Monaco", Font.PLAIN, 14));
+        //chartPanel.setFont(new Font("Monaco", Font.PLAIN, 14));
         for (int i=0;i<options.keySet().size();i++) {
         	final int index = i;
         	final int keyEvent = KeyEvent.VK_1 + i;

@@ -3,7 +3,6 @@ package io.dimitris.duix.external;
 import io.dimitris.duix.Slide;
 
 import java.io.File;
-import java.util.Enumeration;
 
 import org.jdom2.Element;
 
@@ -26,6 +25,17 @@ public class ExternalSlide extends Slide {
 	
 	public void setBaseDirectory(File baseDirectory) {
 		this.baseDirectory = baseDirectory;
+	}
+	
+	public ExternalSlide getNotesSlide() {
+		Element notesElement = configuration.getChild("note");
+		if (notesElement != null) {
+			HTMLSlide notesSlide = new HTMLSlide();
+			notesSlide.setConfiguration(notesElement);
+			notesSlide.setBaseDirectory(baseDirectory);
+			return notesSlide;
+		}
+		else return this;
 	}
 	
 }

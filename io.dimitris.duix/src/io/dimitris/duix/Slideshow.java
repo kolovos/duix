@@ -39,7 +39,9 @@ public class Slideshow {
 			List<ExternalSlide> externalSlides = configuration.getExtenralSlidesBefore(i);
 			slides.addAll(externalSlides);
 			thumbnails.addAll(externalSlides);
-			notes.addAll(externalSlides);
+			for (ExternalSlide externalSlide : externalSlides) {
+				notes.add(externalSlide.getNotesSlide());
+			}
 			
 			slides.add(new PDFSlide(renderer, i, hasNotes, true));
 			thumbnails.add(new PDFSlide(renderer, i, hasNotes, true));
@@ -48,7 +50,9 @@ public class Slideshow {
 			externalSlides = configuration.getExtenralSlidesAfter(i);
 			slides.addAll(externalSlides);
 			thumbnails.addAll(externalSlides);
-			notes.addAll(externalSlides);
+			for (ExternalSlide externalSlide : externalSlides) {
+				notes.add(externalSlide.getNotesSlide());
+			}
 		}
 		
 	}
