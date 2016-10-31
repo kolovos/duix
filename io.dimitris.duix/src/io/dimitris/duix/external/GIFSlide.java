@@ -8,7 +8,7 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class GifSlide extends ExternalSlide {
+public class GIFSlide extends ExternalSlide {
 	
 	@Override
 	public void attach(SlidePanel slidePanel) {

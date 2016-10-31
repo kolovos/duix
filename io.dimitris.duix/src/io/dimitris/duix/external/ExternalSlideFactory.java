@@ -20,7 +20,7 @@ public class ExternalSlideFactory {
 			slide = new PollSlide();
 		}
 		else if ("gif".equalsIgnoreCase(tag)) {
-			slide = new GifSlide();
+			slide = new GIFSlide();
 		}
 		else if ("html".equalsIgnoreCase(tag)) {
 			slide = new HTMLSlide();

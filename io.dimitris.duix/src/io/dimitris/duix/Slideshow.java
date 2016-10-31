@@ -32,7 +32,7 @@ public class Slideshow {
 		if (rectangle.getWidth() > rectangle.getHeight() * 2) { hasNotes = true; };
 		PDFRenderer renderer = new PDFRenderer(document);
 		
-		ExternalSlidesConfiguration configuration = new ExternalSlidesConfiguration(new File(pdf.getAbsolutePath() + ".duix"));
+		ExternalSlidesConfiguration configuration = new ExternalSlidesConfiguration(new File(pdf.getAbsolutePath().substring(0, pdf.getAbsolutePath().length() - 4) + ".duix"));
 		
 		for (int i=0;i<document.getNumberOfPages();i++) {
 			

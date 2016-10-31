@@ -4,7 +4,6 @@ import io.dimitris.duix.SlidePanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ import java.util.LinkedHashMap;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
@@ -71,6 +71,8 @@ public class PollSlide extends ExternalSlide {
 				}
 			}, keyEvent);
         }
+        int padding = slidePanel.getWidth() / 20;
+        chartPanel.setBorder(BorderFactory.createLineBorder(Color.white, padding));
         slidePanel.add(chartPanel, BorderLayout.CENTER);
         
 	}
