@@ -30,7 +30,7 @@ public class Slideshow {
 		PDRectangle rectangle = document.getPage(0).getMediaBox();
 		boolean hasNotes = false;
 		if (rectangle.getWidth() > rectangle.getHeight() * 2) { hasNotes = true; };
-		PDFRenderer renderer = new PDFRenderer(document);
+		PDFRenderer renderer = new CachedPDFRenderer(document); //new PDFRenderer(document);
 		
 		ExternalSlidesConfiguration configuration = new ExternalSlidesConfiguration(new File(pdf.getAbsolutePath().substring(0, pdf.getAbsolutePath().length() - 4) + ".duix"));
 		

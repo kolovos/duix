@@ -13,6 +13,7 @@ public class PDFSlide extends Slide {
 	protected int pageNumber;
 	protected boolean split;
 	protected boolean left;
+	protected Color background = Color.BLACK;
 	
 	public PDFSlide(PDFRenderer renderer, int pageNumber, boolean split, boolean left) {
 		super();
@@ -54,18 +55,26 @@ public class PDFSlide extends Slide {
 		this.left = left;
 	}
 	
+	public void setBackground(Color background) {
+		this.background = background;
+	}
+	
+	public Color getBackground() {
+		return background;
+	}
+	
 	@Override
 	public void paint(SlidePanel slidePanel, Graphics g) {
-		BufferedImage image;
+		
 	    try {
 	    	//TODO: See if the width/height of the page can be computed as follows to avoid rendering multiple times
 	    	// int originalWidth = (int) document.getPage(slideNumber).getMediaBox().getWidth();
 	    	//TODO: Add support for non-split slides
 	        
-	    	g.setColor(Color.BLACK);
+	    	g.setColor(background);
         	g.fillRect(0, 0, slidePanel.getWidth(), slidePanel.getHeight());
         	
-	    	image = renderer.renderImage(pageNumber);
+	    	BufferedImage image = renderer.renderImage(pageNumber);
 	        int originalWidth = image.getWidth();
 	        int originalHeight = image.getHeight();
 	        int parts = 1;
